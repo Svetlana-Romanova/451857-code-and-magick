@@ -69,4 +69,3 @@ window.renderStatistics = function (ctx, names, times) {
 function getRandomFloat(min, max) {
   return Math.random() * (max - min) + min;
 }
-/* jbkjh */
