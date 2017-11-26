@@ -11,39 +11,23 @@ userDialog.classList.remove('hidden');
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-var renderElement = function (arr) {
-  var renderNumber = Math.floor(Math.random() * (arr.length - 1) + 1);
-  return renderNumber;
+var randomElement = function (arr) {
+  var randomNumber = Math.floor(Math.random() * arr.length);
+  return arr[randomNumber];
 };
 
-var wizards = [
-  {
-    name: namesAll[renderElement(namesAll)],
-    surname: namesAll[renderElement(surnamesAll)],
-    coatColor: coatColorsAll[renderElement(coatColorsAll)],
-    eyesColor: eyesColorsAll[renderElement(eyesColorsAll)],
-  },
-  {
-    name: namesAll[renderElement(namesAll)],
-    surname: namesAll[renderElement(surnamesAll)],
-    coatColor: coatColorsAll[renderElement(coatColorsAll)],
-    eyesColor: eyesColorsAll[renderElement(eyesColorsAll)],
-  },
-  {
-    name: namesAll[renderElement(namesAll)],
-    surname: namesAll[renderElement(surnamesAll)],
-    coatColor: coatColorsAll[renderElement(coatColorsAll)],
-    eyesColor: eyesColorsAll[renderElement(eyesColorsAll)],
-  },
-  {
-    name: namesAll[renderElement(namesAll)],
-    surname: namesAll[renderElement(surnamesAll)],
-    coatColor: coatColorsAll[renderElement(coatColorsAll)],
-    eyesColor: eyesColorsAll[renderElement(eyesColorsAll)],
-  }
-];
+var wizards = [];
 
-var renderWizard = function (wizard) {
+for (var i = 0; i < 4; i++) {
+  wizards.push({
+    name: randomElement(namesAll),
+    surname: randomElement(surnamesAll),
+    coatColor: randomElement(coatColorsAll),
+    eyesColor: randomElement(eyesColorsAll),
+  });
+}
+
+var randomWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name + ' ' + wizard.surname;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
@@ -53,8 +37,8 @@ var renderWizard = function (wizard) {
 
 var createFragment = function () {
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < 4; i++) {
-    fragment.appendChild(renderWizard(wizards[i]));
+  for (i = 0; i < 4; i++) {
+    fragment.appendChild(randomWizard(wizards[i]));
   }
   similarListElement.appendChild(fragment);
 };
